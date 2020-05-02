@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack --mode=development --watch",
-    "start": "webpack --mode=production --watch",
+    "build": "webpack --mode=development",
+    "start": "webpack --mode=production",
     "dev-server": "webpack-dev-server",
     "buildlong": "babel src/app.js -d public/scripts --watch",
     "arrow": "babel src/playground/arrow.js -d public/scripts --watch",

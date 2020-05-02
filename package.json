@@ -7,6 +7,7 @@
     "serve": "live-server public/",
     "build": "webpack --mode=development --watch",
     "start": "webpack --mode=production --watch",
+    "dev-server": "webpack-dev-server",
     "buildlong": "babel src/app.js -d public/scripts --watch",
     "arrow": "babel src/playground/arrow.js -d public/scripts --watch",
     "counter": "babel src/playground/counterExample.js -d public/scripts --watch",
@@ -18,7 +19,8 @@
     "babel-loader": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "validator": "^13.0.0"
+    "validator": "^13.0.0",
+    "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

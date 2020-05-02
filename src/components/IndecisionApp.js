@@ -5,30 +5,11 @@ import Action from "./Action";
 import Options from "./Options";
 
 export default class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    options: [],
+  };
 
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-
-    this.state = {
-      options: props.options,
-    };
-  }
-
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
-
-  componentDidUpdate() {
-    console.log("componentDidUpdate");
-  }
-  componentWillUnmount() {
-    console.log("component will unmount");
-  }
-
-  handleAddOption(option) {
+  handleAddOption = (option) => {
     console.log("handleAddOption");
 
     if (!option) {
@@ -43,23 +24,51 @@ export default class IndecisionApp extends React.Component {
         options: prevState.options.concat(option),
       };
     });
-  }
+  };
 
-  handlePick() {
+  handlePick = () => {
     console.log("handlePickCalled");
 
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
     alert(option);
-  }
+  };
 
-  handleDeleteOptions() {
+  handleDeleteOptions = () => {
     console.log("handleDeleteOptions in Root Component");
     this.setState(() => {
       return {
         options: [],
       };
     });
+  };
+
+  componentDidMount() {
+    console.log("componentDidMount");
+
+    try {
+      const json = localStorage.getItem("options");
+      const options = JSON.parse(json);
+
+      if (options) {
+        this.setState(() => ({
+          options,
+        }));
+      }
+    } catch (error) {}
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate");
+
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem("options", json);
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("component will unmount");
   }
 
   render() {
